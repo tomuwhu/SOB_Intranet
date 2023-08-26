@@ -1,19 +1,3 @@
-/*
- Navicat MySQL Data Transfer
-
- Source Server         : local-xampp
- Source Server Type    : MySQL
- Source Server Version : 100428
- Source Host           : localhost:3306
- Source Schema         : test
-
- Target Server Type    : MySQL
- Target Server Version : 100428
- File Encoding         : 65001
-
- Date: 26/08/2023 11:52:24
-*/
-
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
