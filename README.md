@@ -12,7 +12,13 @@ Features:
   - [Syntax highlighter](https://highlightjs.org/) (a11y-dark theme)
 - Hungarian language support
 
-## Clone
+## Setting Up
+
+- copy all php files to your backand server
+- run dump files on your MySQL database
+- set up mysql connection in php files
+- rename serveurl.example.js to serveurl.js
+- set up your server in serveurl.js
 
 ```bash
 npm i
