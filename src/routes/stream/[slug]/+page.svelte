@@ -58,6 +58,7 @@
     insert(e: Event): any {
       var tosend = mydata
       tosend.text = tosend.text && tosend.text.split(/\\/).join('㍕')
+      if (!tosend.name) tosend.name = data.name
       axios
         .post(ServerURL + 'insert.php', tosend)
         .then((res: { data: {} }) => {
