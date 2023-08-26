@@ -57,7 +57,9 @@
   const rest: { insert(e: Event): any; update(id: number, text: any): any } = {
     insert(e: Event): any {
       var tosend = mydata
-      tosend.text && tosend.text.replace('\\', '\\\\')
+      tosend.text = tosend.text && tosend.text.split(/\\/).join('㍕')
+      console.log(tosend.text)
+
       axios
         .post(ServerURL + 'insert.php', tosend)
         .then((res: { data: {} }) => {
@@ -99,7 +101,9 @@
     <span class="ip">{most.split(' ')[1]}</span>
   </div>
   {#if mydata.text}
-    <div class="cc"><code>{@html md.render(mydata.text || '&nbsp;')}</code></div>
+    <div class="cc">
+      <code>{@html md.render(mydata.text || '&nbsp;')}</code>
+    </div>
   {:else}
     <div class="bottom" />
   {/if}
@@ -118,7 +122,9 @@
         >{@html row.id.split(' ')[0] == ma ? row.id.split(' ')[1] : `<b>${row.id}</b`}</span
       >
     </div>
-    <div class="cc"><code>{@html md.render(row.msg || 'Empty post')}</code></div>
+    <div class="cc">
+      <code>{@html md.render((row.msg && row.msg.split('㍕').join('\\')) || 'Empty post')}</code>
+    </div>
   </div>
 {/each}
 
