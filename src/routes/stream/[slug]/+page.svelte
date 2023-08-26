@@ -288,4 +288,31 @@
   div.zz code {
     background-color: rgb(70, 17, 17);
   }
+  @media (max-width: 400px) {
+    div.code {
+      width: 302px;
+    }
+    div.cc {
+      code {
+        width: 265px;
+        overflow-y: auto;
+      }
+    }
+    textarea {
+      all: unset;
+      margin: 10px;
+      margin-top: 5px;
+      margin-bottom: 5px;
+      font-size: 12px;
+      font-family: monospace;
+      color: rgb(10, 75, 10);
+      width: 266px;
+      height: 70px;
+    }
+    div.code {
+      span.user {
+        width: 118px;
+      }
+    }
+  }
 </style>
