@@ -1,7 +1,7 @@
 <?php
     ini_set('display_errors', 1);
     ini_set('display_startup_errors', 1);
-    error_reporting(E_ALL);
+    error_reporting(E_ERROR);
     $inp = json_decode(file_get_contents('php://input'));
     header("Access-Control-Allow-Origin: *");
     header("Access-Control-Allow-Headers: *");
@@ -12,7 +12,7 @@
     $git = $inp->git;
     $pw = $inp->pw;
     if ($un and $pw and $name and $web) {
-        $mysqli = new mysqli("mysql-server-path", "username", "password", "database-name");
+        $mysqli = new mysqli("localhost","root","","test");
         $mysqli -> set_charset("utf8");
         $query = "INSERT INTO sob_users VALUES('".$un."','".$pw."','".$name."','".$mail."','".$web."','".$git."')";
         $result = $mysqli->query($query);

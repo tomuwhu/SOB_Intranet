@@ -1,17 +1,16 @@
 <?php
-    /*
     ini_set('display_errors', 1);
     ini_set('display_startup_errors', 1);
-    error_reporting(E_ALL);
-    */
+    error_reporting(E_ERROR);
     $inp = json_decode(file_get_contents('php://input'));
     header("Access-Control-Allow-Origin: *");
     header("Access-Control-Allow-Headers: *");
+    //print_r($inp);
     $un = $inp->un;
     $pw = $inp->pw;
     session_id($un);
     session_start();
-    $mysqli = new mysqli("mysql-server-path","username","password","database-name");
+    $mysqli = new mysqli("localhost","root","","test");
     $mysqli -> set_charset("utf8");
     $query = "  SELECT *    FROM    sob_users 
                             WHERE   un = '".$un."' 
