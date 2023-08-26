@@ -8,6 +8,7 @@
   import mathjax3 from 'markdown-it-mathjax3'
   import mhl from 'markdown-it-highlightjs'
   import axios from 'axios'
+  var last4: string = ''
   var tzoffset = new Date().getTimezoneOffset() * 60000
   var localISOTime = new Date(Date.now() - tzoffset).toISOString().slice(0, -1)
   var most = localISOTime.split('.')[0].replace('T', ' ')
@@ -81,6 +82,32 @@
       mydata.key = id
     }
   }
+  function repl(e: any) {
+    if (last4.length > 3) last4 = last4.slice(1)
+    last4 += e.key
+    if (/^\dx\dt/.test(last4)) {
+      mydata.text = mydata.text?.slice(0, -4)
+      var x = Number(last4[0])
+      var y = Number(last4[2])
+      var s = `\r\n|`
+      Array(x)
+        .fill(0)
+        .forEach(() => (s += `  |`))
+      s += `\r\n|`
+      Array(x)
+        .fill(0)
+        .forEach(() => (s += `---|`))
+      Array(y)
+        .fill(0)
+        .forEach(() => {
+          s += `\r\n|`
+          Array(x)
+            .fill(0)
+            .forEach(() => (s += `  |`))
+        })
+      mydata.text += s
+    }
+  }
 </script>
 
 <div class="menu">
@@ -90,7 +117,7 @@
 </div>
 <h2>Oktatási csatorna</h2>
 <div class="code zz">
-  <textarea bind:value={mydata.text} cols="30" rows="10" />
+  <textarea bind:value={mydata.text} on:keyup={repl} cols="30" rows="10" />
   <div class="ci">
     {#if mydata.text}
       <button class="bk" on:click={rest.insert}>Beküld</button>
@@ -219,14 +246,14 @@
     background-color: $bc;
     padding: 4px;
     code {
-      color: rgb(234, 234, 165);
-      font-size: 11px;
+      color: rgb(242, 242, 196);
+      font-size: 10px;
       font-family: Courier;
       border: solid 5px $bc;
       background-color: rgb(44, 86, 104);
       display: inline-block;
       width: 765px;
-      padding-left: 25px;
+      padding-left: 15px;
       box-shadow: 1px 1px 3px inset black;
       border: solid 2px orange;
       border-radius: 11px;
@@ -301,7 +328,9 @@
     }
     div.cc {
       code {
-        width: 265px;
+        font-size: 8px;
+        padding-left: 10px;
+        width: 280px;
         overflow-y: auto;
       }
     }
