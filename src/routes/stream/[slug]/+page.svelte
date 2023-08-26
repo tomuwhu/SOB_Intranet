@@ -233,7 +233,7 @@
     font-size: 12px;
     font-family: monospace;
     color: rgb(10, 75, 10);
-    width: 780px;
+    width: 786px;
     height: 70px;
   }
   div.zz {
