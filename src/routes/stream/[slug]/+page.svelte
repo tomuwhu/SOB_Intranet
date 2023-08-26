@@ -56,8 +56,10 @@
   })
   const rest: { insert(e: Event): any; update(id: number, text: any): any } = {
     insert(e: Event): any {
+      var tosend = mydata
+      tosend.text && tosend.text.replace('\\', '\\\\')
       axios
-        .post(ServerURL + 'insert.php', mydata)
+        .post(ServerURL + 'insert.php', tosend)
         .then((res: { data: {} }) => {
           if (res.data) {
             mydata.hl.unshift({
