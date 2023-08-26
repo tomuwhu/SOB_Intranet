@@ -58,8 +58,6 @@
     insert(e: Event): any {
       var tosend = mydata
       tosend.text = tosend.text && tosend.text.split(/\\/).join('㍕')
-      console.log(tosend.text)
-
       axios
         .post(ServerURL + 'insert.php', tosend)
         .then((res: { data: {} }) => {
@@ -78,7 +76,7 @@
         .catch((e: any) => {})
     },
     update(id: number, text: any): any {
-      mydata.text = text
+      mydata.text = text.split('㍕').join('\\')
       mydata.key = id
     }
   }
