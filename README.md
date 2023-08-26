@@ -14,7 +14,7 @@ Features:
 
 ## Setting Up
 
-- copy all php files to your backand server
+- copy all php files to your backend server
 - run dump files on your MySQL database
 - set up mysql connection in php files
 - rename serveurl.example.js to serveurl.js
