@@ -159,7 +159,7 @@
   <div
     class="code {mydata.name == row.name ? 'mc' : 'nmc'}"
     draggable="true"
-    on:dragstart={() => {
+    on:dragstart={e => {
       dragging.key = row.key
       dragging.text = row.msg
     }}
@@ -380,6 +380,9 @@
   }
   code.db {
     cursor: grab;
+  }
+  code.db:active {
+    cursor: grabbing;
   }
   div.mc {
     border: solid 5px rgb(42, 81, 100);
