@@ -292,7 +292,7 @@
   }
   :global(div.cix) {
     code {
-      background-color: rgb(95, 104, 44);
+      background-color: rgb(82, 147, 149);
       cursor: pointer;
     }
   }
@@ -344,7 +344,7 @@
     height: 4px;
   }
   div.zz code {
-    background-color: rgb(70, 17, 17);
+    background-color: rgb(20, 131, 127);
   }
   @media (max-width: 400px) {
     div.code {
