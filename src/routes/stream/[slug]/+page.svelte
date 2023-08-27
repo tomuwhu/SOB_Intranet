@@ -57,22 +57,27 @@
   })
   const rest: { insert(e: Event): any; update(id: number, text: any): any } = {
     insert(e: Event): any {
-      var tosend = mydata
+      var tosend = { key: mydata.key, name: mydata.name, text: mydata.text, un: mydata.un }
       tosend.text = tosend.text && tosend.text.split(/\\/).join('㍕')
       if (!tosend.name) tosend.name = data.name
       axios
         .post(ServerURL + 'insert.php', tosend)
         .then((res: { data: {} }) => {
           if (res.data) {
-            mydata.hl.unshift({
-              key: 0,
-              un: mydata.un,
-              name: mydata.name,
-              user: mydata.name,
-              id: most,
-              msg: mydata.text
-            })
+            if (!mydata.key) {
+              mydata.hl.unshift({
+                key: -1,
+                un: mydata.un,
+                name: mydata.name,
+                user: mydata.name,
+                id: most,
+                msg: mydata.text
+              })
+            } else {
+              mydata.hl.filter((v) => v.key == mydata.key)[0].msg = mydata.text
+            }
             mydata.text = ''
+            mydata.key = 0
           }
         })
         .catch((e: any) => {})
@@ -151,9 +156,9 @@
     <!-- svelte-ignore a11y-click-events-have-key-events -->
     <!-- svelte-ignore a11y-no-static-element-interactions -->
     <div
-      class={mydata.key == row.key ? 'cc cix' : 'cc cei'}
+      class={mydata.key == row.key && mydata.name == row.name ? 'cc cix' : 'cc cei'}
       on:click={() => {
-        if (mydata.key == row.key) mydata.key = 0
+        if (mydata.key == row.key && mydata.name == row.name) mydata.key = 0
       }}
     >
       <code>{@html md.render((row.msg && row.msg.split('㍕').join('\\')) || 'Empty post')}</code>
@@ -301,14 +306,14 @@
     border: solid 0.5px rgb(180, 119, 119);
     padding-left: 6px;
     padding-right: 6px;
-    background-color: rgb(62, 24, 24);
+    background-color: rgb(123, 0, 0);
     border-radius: 4px;
   }
   button:hover {
     background-color: rgb(177, 43, 43);
   }
   button:active {
-    background-color: rgb(19, 68, 19);
+    background-color: rgb(226, 2, 2);
   }
   span.bk {
     display: inline-block;

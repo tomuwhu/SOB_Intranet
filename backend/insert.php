@@ -10,10 +10,15 @@ session_id($un);
 session_start();
 $name = $inp->name;
 $msg = $inp->text;
+$key = $inp->key;
 if ($_SESSION['name'] == $name and $_SESSION['un'] == $un and $name and $msg) {
     $mysqli = new mysqli("localhost", "root", "", "test");
     $mysqli->set_charset("utf8");
-    $query = "INSERT INTO strdata (id, user, msg) VALUES(current_timestamp(),'" . $name . "','" . $msg . "')";
+    if ($key) {
+        $query = "UPDATE strdata SET id = current_timestamp(), msg = '" . $msg . "' WHERE `key` = " . $key;
+    } else {
+        $query = "INSERT INTO strdata (id, user, msg) VALUES(current_timestamp(),'" . $name . "','" . $msg . "')";
+    }
     $result = $mysqli->query($query);
     $answ = $result;
 } else
