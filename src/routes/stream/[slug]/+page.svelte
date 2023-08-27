@@ -8,6 +8,7 @@
   import mathjax3 from 'markdown-it-mathjax3'
   import mhl from 'markdown-it-highlightjs'
   import axios from 'axios'
+  var dragging = {}
   var last4: string = ''
   var tzoffset = new Date().getTimezoneOffset() * 60000
   var localISOTime = new Date(Date.now() - tzoffset).toISOString().slice(0, -1)
@@ -122,7 +123,16 @@
 </div>
 <h2>Oktatási csatorna</h2>
 <div class="code zz">
-  <textarea bind:value={mydata.text} on:keyup={repl} cols="30" rows="10" />
+  <textarea
+    on:dragover={(e) => {
+      e.preventDefault()
+      mydata.text = dragging.text.split('㍕').join('\\')
+    }}
+    bind:value={mydata.text}
+    on:keyup={repl}
+    cols="30"
+    rows="10"
+  />
   <div class="ci">
     {#if mydata.text}
       <button class="bk" on:click={rest.insert}>Beküld</button>
@@ -141,7 +151,15 @@
 </div>
 <br />
 {#each mydata.hl as row}
-  <div class="code">
+  <!-- svelte-ignore a11y-no-static-element-interactions -->
+  <div
+    class="code"
+    draggable="true"
+    on:dragstart={() => {
+      dragging.key = row.key
+      dragging.text = row.msg
+    }}
+  >
     <div class="ci">
       {#if row.user == mydata.name}
         <button class="bp" on:click={() => rest.update(row.key, row.msg)}>Bemásol</button>
@@ -221,6 +239,7 @@
     background-color: $active;
   }
   div.code {
+    cursor: grab;
     margin: 6px;
     box-shadow: 1px 1px 4px black;
     border: solid 1px $bc;
