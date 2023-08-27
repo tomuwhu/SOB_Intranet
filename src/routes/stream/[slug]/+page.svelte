@@ -37,7 +37,7 @@
     localISOTime = new Date(Date.now() - tzoffset).toISOString().slice(0, -1)
     most = localISOTime.split('.')[0].replace('T', ' ')
   }, 1000)
-  onMount(async () => {
+  onMount(() => {
     mydata.un = localStorage.getItem('un') || ''
     try {
       var eventSource = new EventSource(ServerURL + 'try.php')
@@ -182,6 +182,7 @@
     border-radius: 4px;
   }
   h2 {
+    margin: 17px;
     text-shadow: 1px 1px 3px rgb(91, 98, 103);
   }
   div {
