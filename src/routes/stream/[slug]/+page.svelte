@@ -165,11 +165,6 @@
     }}
   >
     <div class="ci">
-      {#if row.user == mydata.name}
-        <button class="bp" on:click={() => rest.update(row.key, row.msg)}>Bemásol</button>
-      {:else}
-        <button class="cp" on:click={() => rest.update(row.key, row.msg)}>Lemásol</button>
-      {/if}
       <span class="user">{row.user}</span>
       <span class="ip"
         >{@html row.id.split(' ')[0] == ma ? row.id.split(' ')[1] : `<b>${row.id}</b`}</span
@@ -183,7 +178,9 @@
         if (mydata.key == row.key && mydata.name == row.name) mydata.key = 0
       }}
     >
-      <code>{@html md.render((row.msg && row.msg.split('㍕').join('\\')) || 'Empty post')}</code>
+      <code class="db"
+        >{@html md.render((row.msg && row.msg.split('㍕').join('\\')) || 'Empty post')}</code
+      >
     </div>
   </div>
 {/each}
@@ -243,7 +240,6 @@
     background-color: $active;
   }
   div.code {
-    cursor: grab;
     margin: 6px;
     box-shadow: 1px 1px 4px black;
     border: solid 1px $bc;
@@ -347,24 +343,6 @@
     background-color: $bc;
     height: 4px;
   }
-  button.bp {
-    background-color: rgb(38, 81, 81);
-  }
-  button.cp {
-    background-color: rgb(51, 14, 91);
-  }
-  button.bp:hover {
-    background-color: rgb(66, 121, 121);
-  }
-  button.cp:hover {
-    background-color: rgb(81, 41, 124);
-  }
-  button.bp:active {
-    background-color: rgb(103, 171, 171);
-  }
-  button.cp:active {
-    background-color: rgb(150, 107, 195);
-  }
   div.zz code {
     background-color: rgb(70, 17, 17);
   }
@@ -396,5 +374,8 @@
         width: 118px;
       }
     }
+  }
+  code.db {
+    cursor: grab;
   }
 </style>
