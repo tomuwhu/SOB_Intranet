@@ -374,6 +374,9 @@
         width: 118px;
       }
     }
+    div.zz {
+      display: none;
+    }
   }
   code.db {
     cursor: grab;
