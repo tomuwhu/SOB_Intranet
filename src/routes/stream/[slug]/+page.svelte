@@ -8,7 +8,7 @@
   import mathjax3 from 'markdown-it-mathjax3'
   import mhl from 'markdown-it-highlightjs'
   import axios from 'axios'
-  var dragging = {}
+  var dragging: { key?: any; text?: any } = {}
   var last4: string = ''
   var tzoffset = new Date().getTimezoneOffset() * 60000
   var localISOTime = new Date(Date.now() - tzoffset).toISOString().slice(0, -1)
@@ -126,7 +126,11 @@
   <textarea
     on:dragover={(e) => {
       e.preventDefault()
+    }}
+    on:drop={() => {
       mydata.text = dragging.text.split('㍕').join('\\')
+      mydata.key = dragging.key
+      dragging = {}
     }}
     bind:value={mydata.text}
     on:keyup={repl}
