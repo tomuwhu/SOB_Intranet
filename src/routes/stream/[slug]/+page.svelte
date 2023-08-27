@@ -148,7 +148,14 @@
         >{@html row.id.split(' ')[0] == ma ? row.id.split(' ')[1] : `<b>${row.id}</b`}</span
       >
     </div>
-    <div class="cc">
+    <!-- svelte-ignore a11y-click-events-have-key-events -->
+    <!-- svelte-ignore a11y-no-static-element-interactions -->
+    <div
+      class={mydata.key == row.key ? 'cc cix' : 'cc cei'}
+      on:click={() => {
+        if (mydata.key == row.key) mydata.key = 0
+      }}
+    >
       <code>{@html md.render((row.msg && row.msg.split('㍕').join('\\')) || 'Empty post')}</code>
     </div>
   </div>
@@ -250,13 +257,23 @@
       font-size: 10px;
       font-family: Courier;
       border: solid 5px $bc;
-      background-color: rgb(44, 86, 104);
       display: inline-block;
       width: 774px;
       padding-left: 15px;
       box-shadow: 1px 1px 3px inset black;
       border: solid 2px orange;
       border-radius: 11px;
+    }
+  }
+  :global(div.cix) {
+    code {
+      background-color: rgb(95, 104, 44);
+      cursor: pointer;
+    }
+  }
+  :global(div.cei) {
+    code {
+      background-color: rgb(44, 86, 104);
     }
   }
   textarea {
