@@ -122,7 +122,7 @@
   >
 </div>
 <h2>Oktatási csatorna</h2>
-<div class="code zz">
+<div class="code zz mx">
   <textarea
     on:dragover={(e) => {
       e.preventDefault()
@@ -157,7 +157,7 @@
 {#each mydata.hl as row}
   <!-- svelte-ignore a11y-no-static-element-interactions -->
   <div
-    class="code"
+    class="code {mydata.name == row.name ? 'mc' : 'nmc'}"
     draggable="true"
     on:dragstart={() => {
       dragging.key = row.key
@@ -286,7 +286,7 @@
       width: 774px;
       padding-left: 15px;
       box-shadow: 1px 1px 3px inset black;
-      border: solid 2px orange;
+      border: solid 2px rgb(32, 78, 110);
       border-radius: 11px;
     }
   }
@@ -380,5 +380,20 @@
   }
   code.db {
     cursor: grab;
+  }
+  div.mc {
+    border: solid 5px rgb(42, 81, 100);
+    box-shadow: 1px 1px 6px rgb(99, 99, 99);
+    border-radius: 5px;
+  }
+  div.nmc {
+    border: solid 5px rgb(0, 0, 0);
+    box-shadow: 1px 1px 6px rgb(11, 11, 11);
+    border-radius: 5px;
+  }
+  div.mx {
+    border: solid 5px rgb(148, 192, 225);
+    box-shadow: 1px 1px 6px rgb(98, 98, 98);
+    border-radius: 5px;
   }
 </style>
