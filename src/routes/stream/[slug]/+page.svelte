@@ -252,7 +252,7 @@
       border: solid 5px $bc;
       background-color: rgb(44, 86, 104);
       display: inline-block;
-      width: 765px;
+      width: 774px;
       padding-left: 15px;
       box-shadow: 1px 1px 3px inset black;
       border: solid 2px orange;
