@@ -18,7 +18,7 @@
   onMount(async () => {
     appdata.un = localStorage.getItem('un') || ''
     try {
-      const res = await axios.post(ServerURL, appdata.un)
+      const res = await axios.post(ServerURL + `/index.php`, appdata.un)
       appdata.un = res.data.un
       appdata.name = res.data.name
     } catch (e: unknown) {
