@@ -29,8 +29,8 @@
 </script>
 
 <div class="menu">
-  <a href="{base}/stream/{mydata.name}">Oktatási csatorna</a><a href="{base}/">Vissza a főoldalra</a
-  >
+  <a
+    href="{base}/">Főoldal</a><a href="{base}/regm/">Adatlap</a><a href="{base}/stream/{mydata.name}">Oktatási csatorna</a>
 </div>
 <h1>Honlapok</h1>
 {#each appdata as elem}

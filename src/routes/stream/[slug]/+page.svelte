@@ -18,20 +18,7 @@
   const md = new Md()
   md.use(mathjax3)
   md.use(mhl, { auto: true })
-  var mydata: {
-    un?: any
-    key?: any
-    name?: string
-    text?: string
-    hl: {
-      key: number
-      un: string
-      name: string | undefined
-      id: string
-      user: string | undefined
-      msg: string | undefined
-    }[]
-  } = { hl: [] }
+  var mydata: any = { hl: [] }
   var ServerURL: string = serverurl
   setInterval(() => {
     tzoffset = new Date().getTimezoneOffset() * 60000
@@ -41,6 +28,7 @@
   onMount(() => {
     mydata.un = localStorage.getItem('un') || ''
     try {
+      /*
       var eventSource = new EventSource(ServerURL + 'try.php')
       eventSource.onmessage = (es) => {
         lastrefresh = most
@@ -52,9 +40,11 @@
           }
         })
       }
-    } catch (e: unknown) {
-      console.log(e)
-    }
+      */
+      axios.get(ServerURL + 'reqa.php').then((res: { data: {} }) => {
+        mydata.hl = res.data
+      })
+    } catch (e: unknown) {}
   })
   const rest: { insert(e: Event): any; update(id: number, text: any): any } = {
     insert(e: Event): any {
@@ -75,7 +65,7 @@
                 msg: mydata.text
               })
             } else {
-              mydata.hl.filter((v) => v.key == mydata.key)[0].msg = mydata.text
+              mydata.hl.filter((v: any) => v.key == mydata.key)[0].msg = mydata.text
             }
             mydata.text = ''
             mydata.key = 0
@@ -117,9 +107,9 @@
 </script>
 
 <div class="menu">
-  <span>{lastrefresh.split(' ')[1]}</span> <a href="{base}/honlapok/">Honlaplista</a><a
-    href="{base}/">Vissza a főoldalra</a
-  >
+  <span>{lastrefresh.split(' ')[1]}</span><a href="{base}/">Főoldal</a><a href="{base}/regm/"
+    >Adatlap</a
+  ><a href="{base}/honlapok/">Honlaplista</a>
 </div>
 <h2>Oktatási csatorna</h2>
 <div class="code zz mx">
@@ -159,7 +149,7 @@
   <div
     class="code {mydata.name == row.name ? 'mc' : 'nmc'}"
     draggable="true"
-    on:dragstart={e => {
+    on:dragstart={(e) => {
       dragging.key = row.key
       dragging.text = row.msg
     }}
