@@ -389,4 +389,19 @@
     box-shadow: 1px 1px 6px rgb(98, 98, 98);
     border-radius: 5px;
   }
+  :global(a) {
+    text-decoration: none;
+    text-shadow: 0px 0px 1px white;
+    color: rgb(137, 200, 255);
+  }
+  :global(a:hover) {
+    text-decoration: none;
+    text-shadow: 1px 1px 3px white;
+    color: rgb(241, 251, 163);
+  }
+  :global(a:active) {
+    text-decoration: none;
+    text-shadow: 1px 1px 3px white;
+    color: rgb(251, 163, 163);
+  }
 </style>
