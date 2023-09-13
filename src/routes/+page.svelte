@@ -55,6 +55,7 @@
   {#if !loggedin}<a href="{base}/reg/">regisztráció</a>{:else}<a href="{base}/regm/">Adatlap</a><a
       href="{base}/honlapok/">Honlaplista</a
     ><a href="{base}/stream/{appdata.name}">Oktatási csatorna</a>
+    <a href="{base}/pszlist">Pontszámaim</a>
   {/if}
 </div>
 <h1>SOB Intranet</h1>
